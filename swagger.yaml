@@ -1,10 +1,10 @@
 openapi: 3.0.0
 info:
-  title: Jobs API
+  title: 06-Jobs-API
   contact: {}
   version: '1.0'
 servers:
-- url: https://store-api-ikicamilo.onrender.com/api/v1
+- url: https://jobs-api-ikicamilo.onrender.com/api/v1
   variables: {}
 paths:
   /auth/register:
@@ -20,26 +20,20 @@ paths:
           application/json:
             schema:
               allOf:
-              - $ref: '#/components/schemas/RegisterRequest'
+              - $ref: '#/components/schemas/RegisterUserRequest'
               - example:
-                  name: peter
-                  email: peter@gmail.com
+                  name: peter401
+                  email: peter401@gmail.com
                   password: secret
             example:
-              name: peter
-              email: peter@gmail.com
+              name: peter401
+              email: peter401@gmail.com
               password: secret
         required: true
       responses:
         '200':
           description: ''
           headers: {}
-          content:
-            application/json:
-              schema:
-                allOf:
-                - $ref: '#/components/schemas/RegisterRequest'
-                - {}
       deprecated: false
       security: []
   /auth/login:
@@ -57,26 +51,22 @@ paths:
               allOf:
               - $ref: '#/components/schemas/LoginUserRequest'
               - example:
-                  email: john9@gmail.com
+                  email: peter401@gmail.com
                   password: secret
             example:
-              email: john9@gmail.com
+              email: peter401@gmail.com
               password: secret
         required: true
       responses:
         '200':
           description: ''
           headers: {}
-          content:
-            text/plain:
-              schema:
-                type: object
       deprecated: false
       security: []
   /jobs:
     get:
       tags:
-      - Jobs
+      - Job
       summary: Get all jobs
       operationId: Getalljobs
       parameters: []
@@ -89,7 +79,7 @@ paths:
       - bearer: []
     post:
       tags:
-      - Jobs
+      - Job
       summary: Create Job
       operationId: CreateJob
       parameters: []
@@ -102,10 +92,10 @@ paths:
               - $ref: '#/components/schemas/CreateJobRequest'
               - example:
                   company: facebook
-                  position: back-end developer
+                  position: fullstack developer
             example:
               company: facebook
-              position: back-end developer
+              position: fullstack developer
         required: true
       responses:
         '200':
@@ -117,7 +107,7 @@ paths:
   /jobs/{id}:
     get:
       tags:
-      - Jobs
+      - Job
       summary: Get single job
       operationId: Getsinglejob
       parameters:
@@ -128,7 +118,7 @@ paths:
         style: simple
         schema:
           type: string
-          example: 6457988a0c2b580c6480cd65
+          example: 645f89004ac5740032142200
       responses:
         '200':
           description: ''
@@ -138,7 +128,7 @@ paths:
       - bearer: []
     patch:
       tags:
-      - Jobs
+      - Job
       summary: Update job
       operationId: Updatejob
       parameters:
@@ -149,7 +139,7 @@ paths:
         style: simple
         schema:
           type: string
-          example: 64579b5c3c55586af4fd20df
+          example: 645f89004ac5740032142200
       requestBody:
         description: ''
         content:
@@ -159,10 +149,10 @@ paths:
               - $ref: '#/components/schemas/UpdatejobRequest'
               - example:
                   company: random
-                  position: full stack developer
+                  position: full stack nodejs developer
             example:
               company: random
-              position: full stack developer
+              position: full stack nodejs developer
         required: true
       responses:
         '200':
@@ -173,7 +163,7 @@ paths:
       - bearer: []
     delete:
       tags:
-      - Jobs
+      - Job
       summary: Delete job
       operationId: Deletejob
       parameters:
@@ -184,7 +174,7 @@ paths:
         style: simple
         schema:
           type: string
-          example: 64579b5c3c55586af4fd20df
+          example: 645f89004ac5740032142200
       responses:
         '200':
           description: ''
@@ -194,8 +184,8 @@ paths:
       - bearer: []
 components:
   schemas:
-    RegisterRequest:
-      title: RegisterRequest
+    RegisterUserRequest:
+      title: RegisterUserRequest
       required:
       - name
       - email
@@ -209,8 +199,8 @@ components:
         password:
           type: string
       example:
-        name: peter
-        email: peter@gmail.com
+        name: peter401
+        email: peter401@gmail.com
         password: secret
     LoginUserRequest:
       title: LoginUserRequest
@@ -224,7 +214,7 @@ components:
         password:
           type: string
       example:
-        email: john9@gmail.com
+        email: peter401@gmail.com
         password: secret
     UpdatejobRequest:
       title: UpdatejobRequest
@@ -239,7 +229,7 @@ components:
           type: string
       example:
         company: random
-        position: full stack developer
+        position: full stack nodejs developer
     CreateJobRequest:
       title: CreateJobRequest
       required:
@@ -253,16 +243,12 @@ components:
           type: string
       example:
         company: facebook
-        position: back-end developer
+        position: fullstack developer
   securitySchemes:
     bearer:
       type: http
       scheme: bearer
 security: []
 tags:
-- name: Misc
-  description: ''
 - name: Auth
-  description: ''
-- name: Jobs
-  description: ''
+- name: Job
